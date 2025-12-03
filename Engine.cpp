@@ -35,7 +35,7 @@ void Engine::input() {
       for (int i = 0; i < 5; i++) {
         int rand = (rand() % 26) + 25;
         Particle p(m_Window, rand);
-        p.push_back(m_particles);
+        m_particles.push_back(p);
     }
   }
 }

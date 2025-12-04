@@ -36,11 +36,32 @@ void Engine::input() {
         int rand = (rand() % 26) + 25;
         Particle p(m_Window, rand);
         m_particles.push_back(p);
+      }
     }
   }
 }
 void Engine::update(float dtAsSeconds) {
-
+  for (std::vector<Particle>::iterator it = m_particles.begin(); it != m_particles.end(); )
+    {
+        if (it->getTTL() > 0.0f)
+        {
+            it->update(dtAsSeconds);
+            ++it;
+        }
+        else
+        {
+            it = m_particles.erase(it);
+        }
+    }
+  /*for (int i = 0; i < m_particles.size(); i = i) {
+    if (m_particle[i].getTTL() > 0.0) {
+      m_particle[i].update(dtAsSeconds);
+      i++;
+    }
+    else {
+      m_particles.erase(m_particles.begin() + i);
+    }
+  }*/
 }
 void Engine::draw() {
 

@@ -3,7 +3,7 @@
 Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosition) : m_A(2, numPoints) {
 	m_ttl = TTL;
 
-	numPoints = m_numPoints;
+	m_numPoints = numPoints;
 	m_radiansPerSec = (float)rand() / RAND_MAX * PI;
 	setCenter(0,0);
 	setSize(target.getSize().x, (-1.0) * target.getSize().y);
@@ -15,7 +15,8 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	size_t RGD[3];
 	for (int i = 0; i < 3; i++) RGD[i] = rand() % 256;
 	m_color2 = Color(RGD[0], RGD[1], RGD[2]);
-	
+	theta = m_radiansPerSec / 2;
+	dTheta = 2 * PI / (numPoints - 1);
 	
 	
 }
@@ -162,5 +163,6 @@ void Particle::unitTests()
 
     cout << "Score: " << score << " / 7" << endl;
 }
+
 
 

@@ -17,7 +17,23 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	m_color2 = Color(RGD[0], RGD[1], RGD[2]);
 	theta = m_radiansPerSec / 2;
 	dTheta = 2 * PI / (numPoints - 1);
-	
+	// from j to numPoints?
+	for (int i = j; i < numPoints; i++) {
+		int r, dx, dy;
+		r = (rand() % 61) + 20;
+		dx = r * cos(theta);
+		dy = r * sin(theta);
+		m_A(0, j) = m_centerCoordinate.x + dx;
+		m_A(1, j) = m_centerCoordinate.y + dy;
+		theta += dTheta;
+	}
+}
+void Particle::draw(RenderTarget& target, RenderStates states) const {
+	VertexArray lines(TriangleFan, numPoints + 1);
+	Vector2f center(target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane));
+
+	lines[0].position = center;
+	lines[0].color = m_color;
 	
 }
 bool Particle::almostEqual(double a, double b, double eps)
@@ -163,6 +179,7 @@ void Particle::unitTests()
 
     cout << "Score: " << score << " / 7" << endl;
 }
+
 
 
 

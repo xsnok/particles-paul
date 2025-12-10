@@ -5,8 +5,8 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 
 	m_numPoints = numPoints;
 	m_radiansPerSec = (float)rand() / RAND_MAX * M_PI;
-	setCenter(0,0);
-	setSize(target.getSize().x, (-1.0) * target.getSize().y);
+	m_cartesianPlane.setCenter(0,0);
+	m_cartesianPlane.setSize(target.getSize().x, (-1.0) * target.getSize().y);
 	m_centerCoordinate = target.mapPixelToCoords(mouseClickPosition, m_cartesianPlane);
 	m_vx = (rand() % 401) + 100;
 	m_vy = (rand() % 401) + 100;
@@ -218,6 +218,7 @@ void Particle::unitTests()
 
     cout << "Score: " << score << " / 7" << endl;
 }
+
 
 
 

@@ -1,0 +1,16 @@
+# Object files
+*.o
+
+# Executables with no file extension
+# Ignore any file with no dot at all (Linux-style executables)
+*
+
+# But keep source files and other important files
+!*.cpp
+!*.hpp
+!*.h
+!*.txt
+!*.md
+!*.gitignore
+!Makefile
+!CMakeLists.txt

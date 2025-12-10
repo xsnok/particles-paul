@@ -9,10 +9,10 @@ TARGET = program
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-  $(CXX) $(OBJ) -o $(TARGET) $(LDFLAGS)
+	$(CXX) $(OBJ) -o $(TARGET) $(LDFLAGS)
 
 %.o: %.cpp
-  $(CXX) $(CXXFLAGS) -c $<
+	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
-  rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ) $(TARGET)

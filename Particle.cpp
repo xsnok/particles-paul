@@ -30,19 +30,26 @@ Particle::Particle(RenderTarget& target, int numPoints, Vector2i mouseClickPosit
 	}
 }
 void Particle::draw(RenderTarget& target, RenderStates states) const {
-	VertexArray lines(TriangleFan, m_numPoints + 1);
-	Vector2f center(target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane));
+    VertexArray lines(TriangleFan, m_numPoints + 1);
 
-	lines[0].position = center;
-	lines[0].color = m_color1;
+    Vector2i centerPixel = target.mapCoordsToPixel(m_centerCoordinate, m_cartesianPlane);
+    lines[0].position = Vector2f(centerPixel);
+    lines[0].color = m_color1;
 
-	for (int j = 1; j <= m_numPoints; j++) {
-		lines[j].position = (target.mapCoordsToPixel(Vector2f(m_A(0, j - 1), m_A(1, j - 1)), m_cartesianPlane));
-		lines[j].color = m_color2;
-	}
-	target.draw(lines);
-	
+    for (int j = 1; j <= m_numPoints; j++) {
+
+        Vector2i pixelPos = target.mapCoordsToPixel(
+            Vector2f(m_A(0, j - 1), m_A(1, j - 1)),
+            m_cartesianPlane
+        );
+
+        lines[j].position = Vector2f(pixelPos);
+        lines[j].color = m_color2;
+    }
+
+    target.draw(lines);
 }
+
 void Particle::update(float dt) {
 	m_ttl -= dt;
 	//the functions rotate, scale, and translate will be defined later
